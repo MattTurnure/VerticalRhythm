@@ -9,79 +9,90 @@ $baseline: 24;
     @return #{$multiple * $x};
 }
 
-@mixin set-type($font-size: 16, $line-height: 16, $margin: $baseline + px 0) {
+@mixin setType($font-size: 16, $line-height: 16) {
+    $base: $baseline;
+
+    @if $font-size > $baseline {
+        @if $font-size % $baseline == 0 {
+            $base: $font-size;
+        } @else {
+            $offset: $font-size % $baseline;
+            $base: ($font-size - $offset) + $baseline;
+        }
+    }
+
     font-size: $font-size + px;
     font-size: rem($font-size);
-    line-height: $line-height/$font-size;
+    line-height: $base/$font-size;
     margin: $baseline + px 0;
 }
 
 @mixin set-relative-type() {
     h1 {
-        @include set-type(36, 48);
+        @include setType(36);
     }
 
     h2 {
-        @include set-type(24, 24);
+        @include setType(24);
     }
 
     h3 {
-        @include set-type(20, 24);
+        @include setType(20);
     }
 
     h4 {
-        @include set-type(18, 24);
+        @include setType(18);
     }
 
     h5, h6, p, ul, ol, dl, td, th {
-        @include set-type(16, 24);
+        @include setType(16);
     }
 
     @media all and (min-width: $breakpoint-one) {
         h1 {
-            @include set-type(48, 48);
+            @include setType(48);
         }
 
         h2 {
-            @include set-type(36, 24);
+            @include setType(36);
         }
 
         h3 {
-            @include set-type(24, 24);
+            @include setType(24);
         }
 
         h4 {
-            @include set-type(18, 24);
+            @include setType(18);
         }
 
         h5, h6, p, ul, ol, dl, td, th[scope="row"] {
-            @include set-type(14, 24);
+            @include setType(14);
         }
     }
 
     @media all and (min-width: $breakpoint-two) {
         h1 {
-            @include set-type(48, 48);
+            @include setType(48);
         }
 
         h2 {
-            @include set-type(36, 48);
+            @include setType(36);
         }
 
         h3 {
-            @include set-type(32, 48);
+            @include setType(32);
         }
 
         h4 {
-            @include set-type(24, 24);
+            @include setType(24);
         }
 
         h5, th {
-            @include set-type(18, 24);
+            @include setType(18);
         }
 
         h6, p, ul, ol, dl, td, th[scope="row"] {
-            @include set-type(14, 24);
+            @include setType(14);
         }
     }
 }
