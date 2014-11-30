@@ -1,5 +1,21 @@
 $browser-context: 16;
 $baseline: 24;
+$grid-base: 24;
+
+%horizontal-gridlines {
+    background: -webkit-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $grid-base + px);
+    background: -moz-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $grid-base + px);
+    background: -o-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $grid-base + px);
+    background-size: 100% $grid-base + px;
+}
+
+%vertical-gridlines {
+    background: -webkit-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $grid-base + px);
+    background: -moz-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $grid-base + px);
+    background: -o-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $grid-base + px);
+    background-size: $grid-base + px 100%;
+    background-position: 50% 100%;
+}
 
 @function rem($pixels, $context: $browser-context) {
     @return #{$pixels/$context}rem;
@@ -95,4 +111,12 @@ $baseline: 24;
             @include setType(14);
         }
     }
+}
+
+body {
+    @extend %horizontal-gridlines;
+}
+
+.wrapper {
+    @extend %vertical-gridlines;
 }
