@@ -1,30 +1,32 @@
 $browser-context: 16;
 $baseline: 24;
+$typesetter-horizontal-debug: true;
+$typesetter-vertical-debug: true;
 
-%horizontal-gridlines {
-    background: -webkit-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $baseline + px);
-    background: -moz-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $baseline + px);
-    background: -o-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $baseline + px);
-    background-size: 100% $baseline + px;
+@mixin repeating-linear-gradient($gradients) {
+    background: -webkit-repeating-linear-gradient( $gradients );
+    background: -moz-repeating-linear-gradient( $gradients );
+    background: -o-repeating-linear-gradient( $gradients );
 }
 
-%vertical-gridlines {
-    background: -webkit-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $baseline + px);
-    background: -moz-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $baseline + px);
-    background: -o-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $baseline + px);
-    background-size: $baseline + px 100%;
-    background-position: 50% 100%;
+@mixin gridlines($deg: -90deg, $line-color: #ccc) {
+    $gradients: $deg, transparent, transparent $baseline - 1 + px, $line-color $baseline + px;
+
+    @if $deg == -90deg {
+        @include repeating-linear-gradient( $gradients );
+        background-size: 100% $baseline + px;
+    } @else {
+        @include repeating-linear-gradient( $gradients );
+        background-size: $baseline + px 100%;
+        background-position: 50% 100%;
+    }
 }
 
 @function rem($pixels, $context: $browser-context) {
     @return #{$pixels/$context}rem;
 }
 
-@function baseline-x($multiple: 1, $x: $baseline) {
-    @return #{$multiple * $x};
-}
-
-@mixin setType($font-size: 16, $line-height: 16) {
+@mixin setType($font-size: 16, $line-height: 1) {
     $base: $baseline;
 
     @if $font-size > $baseline {
@@ -59,7 +61,7 @@ $baseline: 24;
         @include setType(18);
     }
 
-    h5, h6, p, ul, ol, dl, td, th {
+    h5, h6, p, ul, ol, dl, td, th, .vcard {
         @include setType(16);
     }
 
@@ -80,7 +82,7 @@ $baseline: 24;
             @include setType(18);
         }
 
-        h5, h6, p, ul, ol, dl, td, th[scope="row"] {
+        h5, h6, p, ul, ol, dl, td, th[scope="row"], .vcard {
             @include setType(14);
         }
     }
@@ -106,16 +108,20 @@ $baseline: 24;
             @include setType(18);
         }
 
-        h6, p, ul, ol, dl, td, th[scope="row"] {
+        h6, p, ul, ol, dl, td, th[scope="row"], .vcard {
             @include setType(14);
         }
     }
 }
 
 body {
-    @extend %horizontal-gridlines;
-}
+    @if $typesetter-horizontal-debug {
+        @include gridlines();
+    }
 
-.wrapper {
-    @extend %vertical-gridlines;
+    @if $typesetter-vertical-debug {
+        .vertical-gridlines {
+            @include gridlines(0deg);
+        }
+    }
 }
