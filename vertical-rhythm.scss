@@ -1,19 +1,18 @@
 $browser-context: 16;
 $baseline: 24;
-$grid-base: 24;
 
 %horizontal-gridlines {
-    background: -webkit-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $grid-base + px);
-    background: -moz-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $grid-base + px);
-    background: -o-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $grid-base + px);
-    background-size: 100% $grid-base + px;
+    background: -webkit-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $baseline + px);
+    background: -moz-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $baseline + px);
+    background: -o-repeating-linear-gradient( -90deg, transparent, transparent 23px, #cccccc $baseline + px);
+    background-size: 100% $baseline + px;
 }
 
 %vertical-gridlines {
-    background: -webkit-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $grid-base + px);
-    background: -moz-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $grid-base + px);
-    background: -o-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $grid-base + px);
-    background-size: $grid-base + px 100%;
+    background: -webkit-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $baseline + px);
+    background: -moz-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $baseline + px);
+    background: -o-repeating-linear-gradient( 0deg, transparent, transparent 23px, #cccccc $baseline + px);
+    background-size: $baseline + px 100%;
     background-position: 50% 100%;
 }
 
